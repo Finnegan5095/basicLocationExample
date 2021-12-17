@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
+        //Changed latitude and longitude.
         mLatitudeLabel = getResources().getString(R.string.latitude_label);
         mLongitudeLabel = getResources().getString(R.string.longitude_label);
         mLatitudeText = (TextView) findViewById((R.id.latitude_text));
@@ -83,10 +84,10 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         if (!checkPermissions()) {
-            //requestPermissions();
-        } else {
-            getLastLocation();
+            //Uncommented this line of code
+            requestPermissions();
         }
+        getLastLocation();
     }
 
     /**
@@ -105,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Location> task) {
                         if (task.isSuccessful() && task.getResult() != null) {
                             mLastLocation = task.getResult();
-
                             mLatitudeText.setText(String.format(Locale.ENGLISH, "%s: %f",
                                     mLatitudeLabel,
                                     mLastLocation.getLatitude()));
